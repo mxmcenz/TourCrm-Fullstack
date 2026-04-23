@@ -1,0 +1,60 @@
+# 👉 Node.js
+node_modules/
+dist/
+temp/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+
+# 👉 Local env files
+.env
+.env.*.local
+
+# 👉 IDE (WebStorm, VSCode и т.п.)
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 👉 macOS / Linux / Windows
+.DS_Store
+Thumbs.db
+
+# 👉 Optional build output (CLI)
+build/
+output/
+
+# 👉 Cache
+.cache/
+.vite/
+coverage/
+*.local
+*.tgz
+
+# 👉 Linting / Formatting
+eslintcache
+.prettiercache
+
+# 👉 Logs
+.log.
+
+# 👉 Testing
+tests/e2e/videos/
+tests/e2e/screenshots/
+cypress/videos/
+cypress/screenshots/
+
+# 👉 Git
+*.orig
+*.swp
+
+# 👉 Other tools
+*.pid
+*.seed
+*.pid.lock
+
+# 👉 VS Code settings
+.history/

@@ -1,0 +1,103 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false   
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m  
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200" 
+    restart: unless-stopped
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.14.3
+    depends_on:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend/TourCrm
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      ASPNETCORE_URLS: http://+:8080
+      Elastic__Url: http://elasticsearch:9200
+      Elastic__IndexPrefix: tourcrm
+      Serilog__MinimumLevel: Information
+
+      # appsettings override
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
+
+      # JWT
+      Jwt__Key: ${Jwt__Key}
+      Jwt__Issuer: ${Jwt__Issuer}
+      Jwt__Audience: ${Jwt__Audience}
+      Jwt__AccessTokenExpirationMinutes: ${Jwt__AccessTokenExpirationMinutes}
+      Jwt__RefreshTokenExpirationDays: ${Jwt__RefreshTokenExpirationDays}
+
+      # Email
+      EmailSettings__Sender: ${EmailSettings__Sender}
+      EmailSettings__AppPassword: ${EmailSettings__AppPassword}
+      EmailSettings__SmtpServer: ${EmailSettings__SmtpServer}
+
+      # SuperAdmin
+      SuperAdmin__Email: ${SuperAdmin__Email}
+      SuperAdmin__Password: ${SuperAdmin__Password}
+      
+      # Trial
+      Trial__TariffName: ${Trial__TariffName}
+      Trial__Days: ${Trial__Days}
+      Trial__MinEmployees: ${Trial__MinEmployees}
+      Trial__MaxEmployees: ${Trial__MaxEmployees}
+
+      # CORS для кук
+      FrontendOrigins: ${FrontendOrigins}
+    volumes:
+      - backendkeys:/root/.aspnet/DataProtection-Keys
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend/tour-crm
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+volumes:
+  dbdata:
+  backendkeys:
+  esdata:

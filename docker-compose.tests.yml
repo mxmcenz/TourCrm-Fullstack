@@ -1,0 +1,17 @@
+services:
+  tests:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    working_dir: /src
+    env_file:
+      - .env.development
+    environment:
+      ASPNETCORE_ENVIRONMENT: Testing
+    volumes:
+      - ./:/src
+      - dotnet-packages:/root/.nuget/packages
+    command: >
+      bash -lc "set -euo pipefail &&
+                dotnet restore ./backend/TourCrm/TourCrm.sln &&
+                dotnet test ./backend/TourCrm/TourCrm.IntegrationTests/TourCrm.IntegrationTests.csproj -c Release --logger 'trx;LogFileName=test-results.trx' --results-directory /src/TestResults"
+volumes:
+  dotnet-packages:

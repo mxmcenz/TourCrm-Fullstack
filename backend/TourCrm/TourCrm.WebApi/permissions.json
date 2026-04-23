@@ -1,0 +1,74 @@
+{
+  "leads": {
+    "name": "Лиды",
+    "items": [
+      { "key": "ViewLeads", "name": "Просмотр лидов" },
+      { "key": "CreateLeads", "name": "Создание лидов" },
+      { "key": "EditLeads", "name": "Редактирование лидов" },
+      { "key": "DeleteLeads", "name": "Удаление лидов" }
+    ]
+  },
+  "deals": {
+    "name": "Сделки",
+    "items": [
+      { "key": "ViewDeals", "name": "Просмотр сделок" },
+      { "key": "CreateDeals", "name": "Создание сделок" },
+      { "key": "EditDeals", "name": "Редактирование сделок" },
+      { "key": "DeleteDeals", "name": "Удаление сделок" }
+    ]
+  },
+  "roles": {
+    "name": "Роли",
+    "items": [
+      { "key": "ViewRoles", "name": "Просмотр ролей" },
+      { "key": "CreateRoles", "name": "Создание ролей" },
+      { "key": "EditRoles", "name": "Редактирование ролей" },
+      { "key": "DeleteRoles", "name": "Удаление ролей" }
+    ]
+  },
+  "clients": {
+    "name": "Клиенты",
+    "items": [
+      { "key": "ViewClients", "name": "Просмотр клиентов" },
+      { "key": "CreateClients", "name": "Создание клиентов" },
+      { "key": "EditClients", "name": "Редактирование клиентов" },
+      { "key": "DeleteClients", "name": "Удаление клиентов" }
+    ]
+  },
+  "employees": {
+    "name": "Сотрудники",
+    "items": [
+      { "key": "ViewEmployees", "name": "Просмотр сотрудников" },
+      { "key": "CreateEmployees", "name": "Создание сотрудников" },
+      { "key": "EditEmployees", "name": "Редактирование сотрудников" },
+      { "key": "DeleteEmployees", "name": "Удаление сотрудников" }
+    ]
+  },
+  "dictionaries": {
+    "name": "Справочники",
+    "items": [
+      { "key": "ViewDictionaries", "name": "Просмотр справочников" },
+      { "key": "CreateDictionaries", "name": "Создание справочников" },
+      { "key": "EditDictionaries", "name": "Редактирование справочников" },
+      { "key": "DeleteDictionaries", "name": "Удаление справочников" }
+    ]
+  },
+  "legalEntities": {
+    "name": "Юрлица",
+    "items": [
+      { "key": "ViewLegalEntities", "name": "Просмотр юрлиц" },
+      { "key": "CreateLegalEntities", "name": "Создание юрлиц" },
+      { "key": "EditLegalEntities", "name": "Редактирование юрлиц" },
+      { "key": "DeleteLegalEntities", "name": "Удаление юрлиц" }
+    ]
+  },
+  "offices": {
+    "name": "Офисы",
+    "items": [
+      { "key": "ViewOffices", "name": "Просмотр офисов" },
+      { "key": "CreateOffices", "name": "Создание офисов" },
+      { "key": "EditOffices", "name": "Редактирование офисов" },
+      { "key": "DeleteOffices", "name": "Удаление офисов" }
+    ]
+  }
+}
